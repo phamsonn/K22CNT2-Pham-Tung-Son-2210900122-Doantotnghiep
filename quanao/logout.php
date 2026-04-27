@@ -4,6 +4,5 @@ session_start();
 
 session_destroy();
 
-echo "<script>window.history.back();</script>";
-
-?>
+header('Location: index.php');
+exit;

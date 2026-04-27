@@ -52,7 +52,7 @@ if (isset($_POST['login'])) {
         $_SESSION['user_id']    = $row['MA_KH'];
         $_SESSION['user_email'] = $row['EMAIL'];
 
-        echo "<script>window.history.back();</script>";
+        header('Location: index.php');
         exit;
     } else {
         alertBack("Địa chỉ Email hoặc Mật khẩu không đúng");

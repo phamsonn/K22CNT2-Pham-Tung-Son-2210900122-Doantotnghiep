@@ -66,16 +66,17 @@ if (isset($_POST['registry'])) {
               VALUES ('$name', '$email', '$password', '$address')";
 
     if ($MyConn->query($query)) {
-        echo "<script>alert('Thông tin tài khoản được cập nhật thành công');</script>";
+        echo "<script>alert('Đăng ký thành công');</script>";
     } else {
         echo "<script>alert('Đăng ký thất bại');</script>";
     }
 
-    echo "<script>window.history.back();</script>";
+    header('Location: login.php');
+    exit;
 }
 
 function alertBack($msg)
 {
-    echo "<script>alert('$msg'); window.history.back();</script>";
+    header('Location: registry.php');
     exit;
 }
