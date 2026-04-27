@@ -22,13 +22,14 @@ else {
                                 <th>Mã Hóa Đơn</th>
                                 <th>Tổng Tiền</th>
                                 <th>Trạng Thái</th>
+                                <th>Phương thức thanh toán</th>
                                 <th>Xem Chi Tiết Hóa Đơn</th>
                                 <th>Xóa Hóa Đơn</th>
                             </tr>
                         </thead>
                         <tbody>
                         <?php
-                                $getBillQuery = "SELECT TEN_KH, MA_HD, HOADON.TRANGTHAI, TONGTIEN FROM HOADON, KH WHERE (KH.MA_KH = HOADON.MA_KH)";
+                                $getBillQuery = "SELECT TEN_KH, MA_HD, HOADON.TRANGTHAI, TONGTIEN, phuong_thuc FROM HOADON, KH WHERE (KH.MA_KH = HOADON.MA_KH)";
                                 $result = $MyConn->query($getBillQuery);
                                 while($row = mysqli_fetch_array($result)) {
                                     $tenkh = $row['TEN_KH'];
@@ -41,6 +42,7 @@ else {
                                 <td> <?php echo $mahd ?> </td>
                                 <td> <?php echo number_format($tongtien,0,",",".")."<sup>₫</sup>" ?></td>
                                 <td> <?php echo $trangthaihd ?></td>
+                                <td> <?php echo $row['phuong_thuc'] ?></td>
                                 <td>
                                     <!--  < ? p h p echo $pro_id; ?> -->
                                     <a href="index.php?view_detail_bill=<?php echo $mahd ?>" style="text-decoration: none">

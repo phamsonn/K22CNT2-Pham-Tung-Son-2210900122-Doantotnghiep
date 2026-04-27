@@ -1,23 +1,22 @@
 <?php
-
 session_start();
-
 include("admin/includes/database.php");
+
 if (!isset($_SESSION['cart']) || !isset($_SESSION['user_id'])) {
     echo "<script>window.open('cart.php','_self')</script>";
-} else
-    $userID = $_SESSION['user_id'];
-$query = "SELECT DIACHI FROM KH WHERE MA_KH = '$userID'";
+    exit;
+}
+
+$shipping = $_SESSION['shipping_info'] ?? null;
+
+$method = $_SESSION['payment_method'] ?? 'cod';
 
 $MyConn = new MyConnect();
+$userID = $_SESSION['user_id'];
 
+$query = "SELECT * FROM KH WHERE MA_KH = '$userID'";
 $result = $MyConn->query($query);
-
-$row = mysqli_fetch_array($result);
-
-$getAddress = $row['DIACHI'];
-
-
+$user = mysqli_fetch_array($result);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -116,15 +115,32 @@ $getAddress = $row['DIACHI'];
                 <div class="col-lg-8">
                     <div class="border-bottom py-3">
                         <h5><i class="fas fa-map-marked"></i> Địa chỉ nhận hàng</h5>
-                        <p class="text-muted"><?php echo $getAddress; ?></p>
+                        <p class="text-muted">
+                            <?php
+                            echo ($shipping['name'] ?? $user['TEN_KH']) . " - ";
+                            echo ($shipping['email'] ?? $user['EMAIL']) . "<br>";
+                            echo ($shipping['address'] ?? $user['DIACHI']);
+                            ?>
+                        </p>
                     </div>
                     <div class="border-bottom py-3">
                         <h5><i class="fas fa-file-invoice-dollar"></i> Phương thức thanh toán</h5>
-                        <p class="text-muted">COD - Thanh toán khi nhận hàng</p>
+                        <p class="text-muted">
+                            <?php
+                            echo ($method == 'vnpay')
+                                ? 'Thanh toán VNPay'
+                                : 'COD - Thanh toán khi nhận hàng';
+                            ?>
+                        </p>
                     </div>
                     <div class=" py-3">
                         <h5><i class="fas fa-tshirt"></i> Sản phẩm đặt hàng</h5>
-                        <p class="text-muted"></p>
+                        <?php foreach ($_SESSION['cart'] as $item) { ?>
+                            <div class="d-flex justify-content-between">
+                                <span><?php echo $item['name']; ?> x<?php echo $item['quantity']; ?></span>
+                                <span><?php echo number_format($item['price'] * $item['quantity'], 0, ",", "."); ?>đ</span>
+                            </div>
+                        <?php } ?>
                     </div>
                 </div>
                 <div class="col-lg-4">

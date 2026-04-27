@@ -77,6 +77,20 @@ else {
     </div>
 </li>
 
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive"
+        aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-industry"></i>
+        <span>Tin Tức</span>
+    </a>
+    <div id="collapseFive" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="index.php?insert_blog">Thêm Tin Tức</a>
+            <a class="collapse-item" href="index.php?view_blog">Danh Sách Tin Tức</a>
+        </div>
+    </div>
+</li>
+
 <!-- Divider -->
 <hr class="sidebar-divider my-0">
 

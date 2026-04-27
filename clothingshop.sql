@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Mar 31, 2026 at 08:04 AM
+-- Generation Time: Apr 27, 2026 at 10:56 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -44,7 +44,36 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`ID`, `Name`, `Email`, `Passwd`, `Image`, `Contact`, `Address`, `Position`, `About`) VALUES
-('ad01', 'ABC', 'abc@gmail.com', 'abc', 'ad02.jpg', '0123456789', '273 An Duong Vuong', 'Quáº£n lÃ½', '                                                                                                                                                                        ');
+('ad01', 'ABC', 'abc@gmail.com', 'abc', 'ad02.jpg', '0123456789', '273 An Duong Vuong', 'Quản lý', 'Quản lý');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blog`
+--
+
+CREATE TABLE `blog` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `content` text DEFAULT NULL,
+  `thumbnail` varchar(255) DEFAULT NULL,
+  `admin_id` varchar(5) NOT NULL,
+  `created_at` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `blog`
+--
+
+INSERT INTO `blog` (`id`, `title`, `content`, `thumbnail`, `admin_id`, `created_at`) VALUES
+(1, 'Xu hướng thời trang 2026', 'Khám phá những xu hướng thời trang nổi bật năm 2026 với phong cách tối giản, màu sắc trung tính và chất liệu thân thiện môi trường.', 'download (3).jpg', 'ad01', '2026-04-27 14:42:11'),
+(2, 'Cách phối đồ mùa hè năng động', 'Mùa hè đến, việc lựa chọn trang phục phù hợp không chỉ giúp phái mạnh cảm thấy thoải mái mà còn thể hiện phong cách cá nhân đầy năng động và cuốn hút. Trong bài viết này, bạn cùng Canifa Việt Nam khám phá 15 cách phối đồ nam mùa hè đẹp, năng động, cuốn hút, giúp bạn tự tin hơn trong mọi hoạt động.​\r\n\r\nNhững lưu ý khi phối đồ nam mùa hè\r\nTrước khi khám phá các outfit mùa hè nam, chúng ta cần chú ý đến một số yếu tố quan trọng để đảm bảo sự thoải mái và phong cách.\r\n\r\nKiểu dáng trang phục\r\nTrong mùa hè, ưu tiên lựa chọn những trang phục có kiểu dáng thoải mái, không quá bó sát để cơ thể dễ dàng thoát nhiệt. Áo thun, áo sơ mi ngắn tay, quần short hay quần jogger là những lựa chọn lý tưởng. \r\n\r\nLựa chọn chất liệu\r\nChất liệu trang phục đóng vai trò quan trọng trong việc tạo cảm giác mát mẻ. Các chất liệu như cotton, linen hay vải đũi có khả năng thấm hút mồ hôi tốt và thoáng khí. Bạn có thể chọn mua các sản phẩm', 'download (4).jpg', 'ad01', '2026-04-27 14:42:11'),
+(3, 'Phong cách streetwear hiện đại', 'Streetwear ngày càng được ưa chuộng với áo hoodie, quần baggy và phụ kiện cá tính.', 'images (7).jpg', 'ad01', '2026-04-27 14:42:11'),
+(4, 'Cách chọn áo sơ mi phù hợp', 'Hướng dẫn chọn áo sơ mi theo dáng người, màu da và hoàn cảnh sử dụng.', 'images (9).jpg', 'ad01', '2026-04-27 14:42:11'),
+(5, 'Mix đồ công sở thanh lịch', 'Bí quyết phối đồ công sở vừa lịch sự vừa thời trang cho cả nam và nữ.', 'images (8).jpg', 'ad01', '2026-04-27 14:42:11'),
+(6, 'Quần jeans – item không bao giờ lỗi mốt', 'Quần jeans là lựa chọn hoàn hảo cho mọi phong cách từ casual đến lịch sự.', 'images (6).jpg', 'ad01', '2026-04-27 14:42:11'),
+(7, 'Phối màu trang phục chuẩn stylist', 'Học cách phối màu trang phục hài hòa để tạo ấn tượng mạnh mẽ.', 'download (2).jpg', 'ad01', '2026-04-27 14:42:11'),
+(8, 'Chọn trang phục theo dáng người', 'Hiểu rõ dáng người để chọn trang phục phù hợp giúp tôn lên ưu điểm và che khuyết điểm.', 'download (1).jpg', 'ad01', '2026-04-27 14:42:11');
 
 -- --------------------------------------------------------
 
@@ -64,6 +93,7 @@ CREATE TABLE `ct_hoadon` (
 --
 
 INSERT INTO `ct_hoadon` (`MA_HD`, `MA_SP`, `SOLUONG`, `TONGTIEN`) VALUES
+(1504270957, 'ao03', 1, 350000),
 (1512051207, 'giay02', 1, 2500000),
 (1612051219, 'ao05', 1, 420000),
 (1612051219, 'giay03', 1, 1500000),
@@ -72,7 +102,9 @@ INSERT INTO `ct_hoadon` (`MA_HD`, `MA_SP`, `SOLUONG`, `TONGTIEN`) VALUES
 (1702270413, 'ao04', 3, 1020000),
 (1702270605, 'ao01', 6, 1920000),
 (1702270658, 'ao01', 3, 960000),
-(1708191713, 'ao01', 1, 320000);
+(1708191713, 'ao01', 1, 320000),
+(1777277826, 'ao03', 1, 350000),
+(1777280083, 'ao03', 1, 350000);
 
 -- --------------------------------------------------------
 
@@ -104,21 +136,27 @@ CREATE TABLE `hoadon` (
   `MA_HD` int(10) NOT NULL,
   `MA_KH` int(11) NOT NULL,
   `TONGTIEN` int(11) NOT NULL,
-  `TRANGTHAI` text DEFAULT NULL
+  `TRANGTHAI` text DEFAULT NULL,
+  `admin_id` varchar(5) DEFAULT NULL,
+  `phuong_thuc` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `hoadon`
 --
 
-INSERT INTO `hoadon` (`MA_HD`, `MA_KH`, `TONGTIEN`, `TRANGTHAI`) VALUES
-(1512051207, 15, 2500000, 'ChÆ°a Thanh ToÃ¡n'),
-(1612051219, 16, 2500000, 'ChÆ°a Thanh ToÃ¡n'),
-(1612051338, 16, 320000, 'ChÆ°a Thanh ToÃ¡n'),
-(1702270413, 17, 1020000, 'Chưa Thanh Toán'),
-(1702270605, 17, 1920000, 'Chưa Thanh Toán'),
-(1702270658, 17, 960000, 'Chưa Thanh Toán'),
-(1708191713, 17, 320000, 'Chưa Thanh Toán');
+INSERT INTO `hoadon` (`MA_HD`, `MA_KH`, `TONGTIEN`, `TRANGTHAI`, `admin_id`, `phuong_thuc`) VALUES
+(1504270957, 15, 350000, 'Chưa Thanh Toán', 'ad01', 'COD'),
+(1512051207, 15, 2500000, 'Chưa Thanh Toán', 'ad01', 'COD'),
+(1612051219, 16, 2500000, 'Chưa Thanh Toán', 'ad01', 'COD'),
+(1612051338, 16, 320000, 'Chưa Thanh Toán', 'ad01', 'COD'),
+(1702270413, 17, 1020000, 'Chưa Thanh Toán', 'ad01', 'COD'),
+(1702270605, 17, 1920000, 'Chưa Thanh Toán', 'ad01', 'COD'),
+(1702270658, 17, 960000, 'Chưa Thanh Toán', 'ad01', 'COD'),
+(1708191713, 17, 320000, 'Chưa Thanh Toán', 'ad01', 'COD'),
+(1777277722, 15, 350000, 'Đã Thanh Toán', NULL, 'VNPay'),
+(1777277826, 15, 350000, 'Đã Thanh Toán', NULL, 'VNPay'),
+(1777280083, 15, 350000, 'Đã Thanh Toán', NULL, 'VNPay');
 
 -- --------------------------------------------------------
 
@@ -141,7 +179,7 @@ CREATE TABLE `kh` (
 --
 
 INSERT INTO `kh` (`MA_KH`, `TEN_KH`, `EMAIL`, `MATKHAU`, `DIACHI`, `AVATAR`, `TRANGTHAI`) VALUES
-(15, 'Xin', 'xin@gmail.com', '12345678', 'PY', 'kh01.jpg', ''),
+(15, 'Xin', 'xin@gmail.com', '12345678', 'PY', '1777277511_4k-Windows-11-Dark-Abstract-Blue-Purple-Wave-Wallpaper.jpg', ''),
 (16, 'tien', 'tien@gmail.com', '123456', 'HCM', 'kh02.jpg', NULL),
 (17, 'Nguyễn Thuỳ Trang', 'ntt@gmail.com', '12345678', '3602 Gaylord Dr', NULL, NULL),
 (18, 'Nguyen Van A', 'test01@gmail.com', 'Password1', 'Ha Noi', NULL, NULL),
@@ -217,6 +255,13 @@ ALTER TABLE `admin`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Indexes for table `blog`
+--
+ALTER TABLE `blog`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_blog_admin` (`admin_id`);
+
+--
 -- Indexes for table `ct_hoadon`
 --
 ALTER TABLE `ct_hoadon`
@@ -233,7 +278,8 @@ ALTER TABLE `hangsx`
 -- Indexes for table `hoadon`
 --
 ALTER TABLE `hoadon`
-  ADD PRIMARY KEY (`MA_HD`);
+  ADD PRIMARY KEY (`MA_HD`),
+  ADD KEY `fk_hoadon_admin` (`admin_id`);
 
 --
 -- Indexes for table `kh`
@@ -260,10 +306,16 @@ ALTER TABLE `sp`
 --
 
 --
+-- AUTO_INCREMENT for table `blog`
+--
+ALTER TABLE `blog`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT for table `hoadon`
 --
 ALTER TABLE `hoadon`
-  MODIFY `MA_HD` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1708191714;
+  MODIFY `MA_HD` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1777280084;
 
 --
 -- AUTO_INCREMENT for table `kh`
@@ -276,11 +328,23 @@ ALTER TABLE `kh`
 --
 
 --
+-- Constraints for table `blog`
+--
+ALTER TABLE `blog`
+  ADD CONSTRAINT `fk_blog_admin` FOREIGN KEY (`admin_id`) REFERENCES `admin` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `ct_hoadon`
 --
 ALTER TABLE `ct_hoadon`
   ADD CONSTRAINT `FK_HD` FOREIGN KEY (`MA_HD`) REFERENCES `hoadon` (`MA_HD`),
   ADD CONSTRAINT `FK_SP` FOREIGN KEY (`MA_SP`) REFERENCES `sp` (`MA_SP`);
+
+--
+-- Constraints for table `hoadon`
+--
+ALTER TABLE `hoadon`
+  ADD CONSTRAINT `fk_hoadon_admin` FOREIGN KEY (`admin_id`) REFERENCES `admin` (`ID`);
 
 --
 -- Constraints for table `sp`

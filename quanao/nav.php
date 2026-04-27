@@ -1,3 +1,6 @@
+<?php
+$current_page = basename($_SERVER['PHP_SELF']);
+?>
 <nav class="navbar navbar-expand-sm bg-secondary navbar-dark sticky-top shadow-lg py-2">
     <div class="container">
         <a class="navbar-brand" href="index.php"><span class="text-warning">PTS Fashion</span></a>
@@ -7,16 +10,21 @@
 
         <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="index.php">Trang Chủ <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="product.php">Sản Phẩm</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Giới Thiệu</a>
+                <li class="nav-item <?php echo ($current_page == 'index.php') ? 'active' : ''; ?>">
+                    <a class="nav-link" href="index.php">Trang Chủ</a>
                 </li>
 
+                <li class="nav-item <?php echo ($current_page == 'product.php') ? 'active' : ''; ?>">
+                    <a class="nav-link" href="product.php">Sản Phẩm</a>
+                </li>
+
+                <li class="nav-item <?php echo ($current_page == 'blogs.php') ? 'active' : ''; ?>">
+                    <a class="nav-link" href="blogs.php">Tin Tức</a>
+                </li>
+
+                <li class="nav-item <?php echo ($current_page == 'about.php') ? 'active' : ''; ?>">
+                    <a class="nav-link" href="about.php">Giới Thiệu</a>
+                </li>
             </ul>
 
             <form class="form-inline" method="get" action="search.php">

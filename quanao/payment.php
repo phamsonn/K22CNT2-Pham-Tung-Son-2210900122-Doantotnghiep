@@ -1,13 +1,21 @@
 <?php
-
 session_start();
-
 include("admin/includes/database.php");
+
 if (!isset($_SESSION['cart']) || !isset($_SESSION['user_id'])) {
     echo "<script>window.open('cart.php','_self')</script>";
-} else
+    exit;
+}
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
+    $method = $_POST['paymentMethod'] ?? 'cod';
+
+    $_SESSION['payment_method'] = $method;
+
+    header("Location: submitOrder.php");
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -88,25 +96,27 @@ if (!isset($_SESSION['cart']) || !isset($_SESSION['user_id'])) {
                 <div class="col-lg-6 mx-auto">
                     <h4 class="font-weight-bold mb-4">Chọn phương thức thanh toán</h4>
 
-                    <div class="form-check ml-4 my-3">
-                        <input type="radio" class="form-check-input mt-2" id="cod" name="paymentMethod" checked>
-                        <label for="cod" class="form-check-label"><i class="fas fa-money-bill-alt fa-2x"></i> COD - Thanh toán khi nhận hàng</label>
-                    </div>
-                    <div class="form-check ml-4 my-3">
+                    <form method="post">
+                        <div class="form-check ml-4 my-3">
+                            <input type="radio" class="form-check-input mt-2" id="cod" name="paymentMethod" value="cod" checked>
+                            <label for="cod" class="form-check-label">
+                                <i class="fas fa-money-bill-alt fa-2x"></i> COD - Thanh toán khi nhận hàng
+                            </label>
+                        </div>
 
-                        <input type="radio" class="form-check-input mt-2" id="visa" name="paymentMethod">
-                        <label for="visa" class="form-check-label"><i class="fab fa-cc-visa fa-2x"></i> Thanh toán bằng thẻ quốc tế Visa, Mastercard</label>
+                        <div class="form-check ml-4 my-3">
+                            <input type="radio" class="form-check-input mt-2" id="vnpay" name="paymentMethod" value="vnpay">
+                            <label for="vnpay" class="form-check-label">
+                                <i class="fab fa-cc-visa fa-2x"></i> Thanh toán bằng VNPay
+                            </label>
+                        </div>
 
-                    </div>
-                    <div class="form-check ml-4 my-3">
+                        <button type="submit"
+                            class="btn btn-block btn-lg btn-danger font-weight-bold mt-4">
+                            Xác nhận hình thức thanh toán
+                        </button>
+                    </form>
 
-                        <input type="radio" class="form-check-input mt-2" id="atm" name="paymentMethod">
-                        <label for="atm" class="form-check-label"><i class="fab fa-cc-amazon-pay fa-2x"></i> Thẻ ATM nội địa/Internet Banking</label>
-
-                    </div>
-
-
-                    <a href="submitOrder.php" class="btn btn-block btn-lg btn-danger font-weight-bold mt-4">Xác nhận hình thức thanh toán</a>
                 </div>
             </div>
         </div>

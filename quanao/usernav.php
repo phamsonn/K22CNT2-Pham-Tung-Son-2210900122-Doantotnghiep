@@ -32,11 +32,11 @@ $_SESSION['user_avatar'] = $row_user['AVATAR'];
                 <i class="fas fa-user fa-sm fa-fw mr-2"></i>
                 Hồ Sơ
             </a>
-            <a class="dropdown-item small" href="#">
+            <a class="dropdown-item small" href="profile.php">
                 <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                 Chỉnh Sửa Hồ Sơ
             </a>
-            <a class="dropdown-item small" href="#">
+            <a class="dropdown-item small" href="history.php">
                 <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                 Nhật Ký Mua Hàng
             </a>

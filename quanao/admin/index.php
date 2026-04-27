@@ -206,6 +206,23 @@ $admin_about = $row_admin['About'];
                         include("edit_man.php");
                     }
 
+                    //Trang Blog
+                    else if(isset($_GET['insert_blog'])) {
+                        include("insert_blog.php");
+                    }
+
+                    else if(isset($_GET['view_blog'])) {
+                        include("view_blog.php");
+                    }
+
+                    else if(isset($_GET['delete_blog'])) {
+                        include("delete_blog.php");
+                    }
+
+                    else if(isset($_GET['edit_blog'])) {
+                        include("edit_blog.php");
+                    }
+
 
                     //Trang Hóa Đơn
                     else if(isset($_GET['view_bill'])) {

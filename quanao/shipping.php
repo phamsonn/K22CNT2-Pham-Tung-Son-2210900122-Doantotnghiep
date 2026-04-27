@@ -1,23 +1,33 @@
 <?php
-
 session_start();
-
 include("admin/includes/database.php");
 
 if (!isset($_SESSION['cart']) || !isset($_SESSION['user_id'])) {
     echo "<script>window.open('cart.php','_self')</script>";
-} else
-    $MyConn = new MyConnect();
+    exit;
+}
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    $_SESSION['shipping_info'] = [
+        'name' => $_POST['customerName'],
+        'email' => $_POST['customerEmail'],
+        'address' => $_POST['customerAddress']
+    ];
+
+    header("Location: payment.php");
+    exit;
+}
+
+$MyConn = new MyConnect();
 $userID = $_SESSION['user_id'];
-
 $getUser = "SELECT * FROM KH WHERE MA_KH='$userID'";
-
 $execute = $MyConn->query($getUser);
+$user = mysqli_fetch_array($execute);
 
-$result = mysqli_fetch_array($execute);
-
+$shipping = $_SESSION['shipping_info'] ?? null;
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -93,27 +103,35 @@ $result = mysqli_fetch_array($execute);
 
 
         <div class="my-5 d-block">
-            <form action="POST">
-                <div class="row">
-                    <div class="col-lg-6 mx-auto">
-                        <form method="get">
-                            <div class="form-group">
-                                <label for="customerName">Họ và tên</label>
-                                <input type="text" class="form-control" placeholder="Điền họ và tên khách hàng" name="customerName" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="customerEmail">Email</label>
-                                <input type="text" class="form-control" placeholder="Điền Email khách hàng" name="customerEmail" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="customerAddress">Địa Chỉ</label>
-                                <input type="text" class="form-control" placeholder="Điền địa chỉ khách hàng" name="customerAddress" required>
-                            </div>
-
-                            <a href="payment.php" type="submit" class="mt-4 btn btn-block btn-danger btn-lg font-weight-bold" name="move">Xác nhận thông tin</a>
-                        </form>
-                    </div>
+            <form method="post">
+                <div class="form-group">
+                    <label>Họ và tên</label>
+                    <input type="text" class="form-control"
+                        name="customerName"
+                        value="<?php echo $shipping['name'] ?? $user['TEN_KH']; ?>"
+                        required>
                 </div>
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" class="form-control"
+                        name="customerEmail"
+                        value="<?php echo $shipping['email'] ?? $user['EMAIL']; ?>"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label>Địa chỉ</label>
+                    <input type="text" class="form-control"
+                        name="customerAddress"
+                        value="<?php echo $shipping['address'] ?? $user['DIACHI']; ?>"
+                        required>
+                </div>
+
+                <button type="submit"
+                    class="mt-4 btn btn-block btn-danger btn-lg font-weight-bold">
+                    Xác nhận thông tin
+                </button>
             </form>
         </div>
     </div>
