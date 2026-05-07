@@ -24,6 +24,7 @@ else {
                                 <th>Loại Sản Phẩm</th>
                                 <th>Nhà Sản Xuất</th>
                                 <th>Giá Thành</th>
+                                <th>Chất Liệu</th>
                                 <th>Xóa Sản Phẩm</th>
                                 <th>Sửa Thông Tin Sản Phẩm</th>
                             </tr>
@@ -54,6 +55,7 @@ else {
                                 $p_about = $row['MIEUTA_SP'];
                                 $p_image = $row['HINHANH_SP'];
                                 $p_price = $row['GIA'];
+                                $p_material = $row['CHAT_LIEU'];
                             
                         ?>
                             <tr>
@@ -63,6 +65,8 @@ else {
                                 <td> <?php echo $p_cat ?></td>
                                 <td> <?php echo $p_man ?></td>
                                 <td> <?php echo number_format($p_price,0,",","."); ?><sup>đ</sup></td>
+                                <td> <?php echo $p_material ?></td>
+
                                 <td>
                                     <!--  < ? p h p echo $pro_id; ?> -->
                                     <a href="index.php?delete_product=<?php echo $p_id ?>" class="text-danger" style="text-decoration: none">

@@ -19,9 +19,10 @@ if ($vnp_ResponseCode == '00') {
     $billID = time();
     $user = $order['user_id'];
     $total = $order['total'];
+    $discount = $total * 0.02; 
     $cart = $order['cart'];
-    $insertBill = "INSERT INTO HOADON (MA_HD, MA_KH, TONGTIEN, TRANGTHAI, phuong_thuc) 
-                   VALUES ('$billID','$user','$total','Đã Thanh Toán', 'VNPay')";
+    $insertBill = "INSERT INTO HOADON (MA_HD, MA_KH, TONGTIEN, TRANGTHAI, phuong_thuc, GIAM_GIA) 
+                   VALUES ('$billID','$user','$total','Đã Thanh Toán', 'VNPay', '$discount')";
 
     $executeInsertBill = $MyConn->query($insertBill);
 

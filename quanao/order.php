@@ -18,14 +18,17 @@ $total = 0;
 foreach ($cart as $product) {
     $total += (int)$product["price"] * $product["quantity"];
 }
+$discount = $total * 0.02; 
+$finalTotal = $total - $discount;
+
 
 $billID = time();
 
 
 if ($method == 'cod') {
 
-    $insertBill = "INSERT INTO HOADON (MA_HD, MA_KH, TONGTIEN, TRANGTHAI, phuong_thuc) 
-                   VALUES ('$billID','$userID','$total','Chưa Thanh Toán', 'COD')";
+    $insertBill = "INSERT INTO HOADON (MA_HD, MA_KH, TONGTIEN, TRANGTHAI, phuong_thuc, giam_gia) 
+                   VALUES ('$billID','$userID','$total','Chưa Thanh Toán', 'COD', '$discount')";
 
     $executeInsertBill = $MyConn->query($insertBill);
 
@@ -79,13 +82,13 @@ if ($method == 'cod') {
         "vnp_Version" => $vnp_Version,
         "vnp_Command" => $vnp_Command,
         "vnp_TmnCode" => $vnp_TmnCode,
-        "vnp_Amount" => $total * 100,
+        "vnp_Amount" => $finalTotal * 100,
         "vnp_CurrCode" => "VND",
         "vnp_TxnRef" => $vnp_TxnRef,
         "vnp_OrderInfo" => 'Thanh toan don hang',
         "vnp_OrderType" => "other",
         "vnp_Locale" => "vn",
-        "vnp_ReturnUrl" => "http://localhost/pts/vnpay_return.php",
+        "vnp_ReturnUrl" => "http://localhost/quanao/vnpay_return.php",
         "vnp_IpAddr" => $vnp_IpAddr
     ];
 

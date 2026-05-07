@@ -116,11 +116,32 @@ $resultOrder = $MyConn->query($queryOrder);
 
                 </div>
 
-                <div class="card-footer d-flex justify-content-between">
-                    <strong>Tổng tiền:</strong>
-                    <strong class="text-danger">
-                        <?php echo number_format($order['TONGTIEN'], 0, ",", "."); ?>đ
-                    </strong>
+                <div class="card-footer">
+
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Tạm tính:</span>
+                        <span>
+                            <?php
+                            $subtotal = $order['TONGTIEN'] - $order['GIAM_GIA'];
+                            echo number_format($order['TONGTIEN'], 0, ",", ".");
+                            ?>đ
+                        </span>
+                    </div>
+
+                    <div class="d-flex justify-content-between mb-2 text-success">
+                        <span>Giảm giá:</span>
+                        <span>
+                            -<?php echo number_format($order['GIAM_GIA'], 0, ",", "."); ?>đ
+                        </span>
+                    </div>
+
+                    <div class="d-flex justify-content-between border-top pt-2">
+                        <strong>Tổng tiền:</strong>
+                        <strong class="text-danger">
+                            <?php echo number_format($subtotal, 0, ",", "."); ?>đ
+                        </strong>
+                    </div>
+
                 </div>
             </div>
 

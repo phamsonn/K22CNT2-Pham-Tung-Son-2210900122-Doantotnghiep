@@ -154,19 +154,21 @@ $user = mysqli_fetch_array($result);
                         foreach ($cart as $product) {
                             $total = $total + (int)$product["price"] * $product["quantity"];
                         }
+                        $discount = $total * 0.02; 
+                        $finalTotal = $total - $discount;
                         ?>
                         <div class="d-flex justify-content-between px-3 py-2">
                             <div>Giá sản phẩm</div>
                             <h5><?php echo number_format($total, 0, ",", "."); ?><span>đ</span> </h5>
                         </div>
                         <div class="d-flex justify-content-between px-3 py-2">
-                            <div>Phí vận chuyển</div>
-                            <h5>0<sup>đ</sup> </h5>
+                            <div>Giảm giá</div>
+                            <h5>-<?php echo number_format($discount, 0, ",", "."); ?><span>đ</span></h5>
                         </div>
 
                         <div class="d-flex justify-content-between p-3 border-top font-weight-bold">
                             <div>Tổng Tiền</div>
-                            <h5> <?php echo number_format($total, 0, ",", "."); ?><span>đ</span></h5>
+                            <h5> <?php echo number_format($finalTotal, 0, ",", "."); ?><span>đ</span></h5>
                         </div>
                         <button id="submit-order" class="btn btn-block btn-danger btn-lg font-weight-bold mb-n4">Đặt hàng</button>
                     </div>
